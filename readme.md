@@ -11,7 +11,10 @@
 
 <span style="color:blue">Provide your answer here! </span>
 > Note: you can also use code snippets to illustrate your answer. 
-
+```kotlin
+val a: String = "value" // non-null type
+val b: String? = "value" // nullable type
+```
 ```kotlin 
 // example code snippet
 val a: String = "value" // non-null type
