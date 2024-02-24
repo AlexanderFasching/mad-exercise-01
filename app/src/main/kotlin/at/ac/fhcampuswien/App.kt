@@ -3,10 +3,15 @@
  */
 package at.ac.fhcampuswien
 
+import java.lang.IllegalArgumentException
+import kotlin.math.pow
+import kotlin.random.Random
+
 class App {
     // Game logic for a number guessing game
     fun playNumberGame(digitsToGuess: Int = 4) {
         //TODO: build a menu which calls the functions and works with the return values
+
     }
 
     /**
@@ -24,8 +29,29 @@ class App {
      * @throws IllegalArgumentException if the length is more than 9 or less than 1.
      */
     val generateRandomNonRepeatingNumber: (Int) -> Int = { length ->
-        //TODO implement the function
-        0   // return value is a placeholder
+        if (length < 1 || length > 9) {
+            throw IllegalArgumentException()
+        }
+        val numbers = mutableListOf<Int>()
+        var i = 0
+        while (i < length) {
+            var rand = Random.nextInt(1, 10)
+            var repeat = false;
+            for (it in numbers) {
+                if (it == rand) {
+                    repeat = true;
+                }
+            }
+            if (!repeat) {
+                numbers.add(rand)
+                i++
+            }
+        }
+        var number = 0;
+        for(j in 0 until length) {
+            number += numbers[j] * 10.0.pow(j.toDouble()).toInt()
+        }
+        number
     }
 
     /**
@@ -46,11 +72,40 @@ class App {
      */
     val checkUserInputAgainstGeneratedNumber: (Int, Int) -> CompareResult = { input, generatedNumber ->
         //TODO implement the function
-        CompareResult(0, 0)   // return value is a placeholder
+        if (input.toString().length != generatedNumber.toString().length) {
+            throw IllegalArgumentException()
+        }
+        var n = 0
+        var m = 0
+        var inputs = input.toDigits()
+        val randoms = generatedNumber.toDigits()
+
+        for (i in 0 until inputs.size) {
+            if (inputs[i] == randoms[i]) {
+                m++
+            }
+        }
+        inputs = inputs.distinct();
+        for (i in inputs) {
+            for (j in randoms) {
+                if (i == j) {
+                    n++
+                    break
+                }
+            }
+        }
+
+        CompareResult(n, m)   // return value is a placeholder
     }
+    // Integer to List of digits. From: https://discuss.kotlinlang.org/t/todigits-function-for-int/15298
+    fun Int.toDigits(): List<Int> = toString().map { it.toString().toInt() }
 }
 
 fun main() {
     println("Hello World!")
     // TODO: call the App.playNumberGame function with and without default arguments
+    val classUnderTest = App()
+    val toTest =  classUnderTest.checkUserInputAgainstGeneratedNumber(5555,8576)
+    println(toTest)
+
 }

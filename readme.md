@@ -10,19 +10,16 @@
 ### Describe how Kotlin handles null safety. What are nullable types and non-null types in Kotlin? (0,5 points)
 
 <span style="color:blue">Provide your answer here! </span>
-> Note: you can also use code snippets to illustrate your answer. 
 ```kotlin
 val a: String = "value" // non-null type
 val b: String? = "value" // nullable type
-```
-```kotlin 
-// example code snippet
-val a: String = "value" // non-null type
 ```
 
 ### What are lambda expressions and higher order functions in Kotlin? Why would you store a function inside a variable? (0,5 points)
 
 <span style="color:blue">Provide your answer here!</span>
+Higher order functions are functions that have functions as parameters or as return value.
+
 
 ### Provide a solution for the following number guessing game inside `App.kt`. (3 points)
 
