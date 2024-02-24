@@ -3,15 +3,43 @@
  */
 package at.ac.fhcampuswien
 
-import java.lang.IllegalArgumentException
+import kotlin.IllegalArgumentException
 import kotlin.math.pow
 import kotlin.random.Random
 
 class App {
     // Game logic for a number guessing game
     fun playNumberGame(digitsToGuess: Int = 4) {
-        //TODO: build a menu which calls the functions and works with the return values
-
+        var input: Int = 0
+        var won = false
+        var generatedNumber = -1
+        while (!won) {
+            while (true) {
+                print("Guess a number: ")
+                try {
+                    input = readln().toInt()
+                } catch (e: IllegalArgumentException) {
+                    println("Not a number!")
+                    continue
+                }
+                break
+            }
+            val numberLength = input.toString().length
+            if (generatedNumber == -1) {
+                generatedNumber = generateRandomNonRepeatingNumber(numberLength)
+            }
+            try {
+                val result = checkUserInputAgainstGeneratedNumber(input, generatedNumber)
+                println(result)
+                if (result.m == numberLength) {
+                    println("You won!")
+                    won = true;
+                }
+            } catch (e: IllegalArgumentException) {
+                println("Number has to be ${generatedNumber.toString().length} digits long!")
+                continue
+            }
+        }
     }
 
     /**
@@ -102,10 +130,8 @@ class App {
 }
 
 fun main() {
-    println("Hello World!")
     // TODO: call the App.playNumberGame function with and without default arguments
-    val classUnderTest = App()
-    val toTest =  classUnderTest.checkUserInputAgainstGeneratedNumber(5555,8576)
-    println(toTest)
+    val numberGame = App()
+    numberGame.playNumberGame()
 
 }
