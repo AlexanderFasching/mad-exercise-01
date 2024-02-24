@@ -12,10 +12,10 @@ class App {
     fun playNumberGame(digitsToGuess: Int = 4) {
         var input: Int = 0
         var won = false
-        var generatedNumber = -1
+        var generatedNumber = generateRandomNonRepeatingNumber(digitsToGuess)
         while (!won) {
             while (true) {
-                print("Guess a number: ")
+                print("Guess a $digitsToGuess digit number: ")
                 try {
                     input = readln().toInt()
                 } catch (e: IllegalArgumentException) {
@@ -25,9 +25,6 @@ class App {
                 break
             }
             val numberLength = input.toString().length
-            if (generatedNumber == -1) {
-                generatedNumber = generateRandomNonRepeatingNumber(numberLength)
-            }
             try {
                 val result = checkUserInputAgainstGeneratedNumber(input, generatedNumber)
                 println(result)
@@ -36,7 +33,7 @@ class App {
                     won = true;
                 }
             } catch (e: IllegalArgumentException) {
-                println("Number has to be ${generatedNumber.toString().length} digits long!")
+                println("Number has to be $digitsToGuess digits long!")
                 continue
             }
         }
@@ -132,6 +129,6 @@ class App {
 fun main() {
     // TODO: call the App.playNumberGame function with and without default arguments
     val numberGame = App()
-    numberGame.playNumberGame()
+    numberGame.playNumberGame(5)
 
 }
