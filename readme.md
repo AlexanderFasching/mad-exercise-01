@@ -9,17 +9,27 @@
 ## Questions
 ### Describe how Kotlin handles null safety. What are nullable types and non-null types in Kotlin? (0,5 points)
 
-<span style="color:blue">Provide your answer here! </span>
+To avoid the problem of null reference errors, regular variables cannot hold null:
 ```kotlin
-val a: String = "value" // non-null type
-val b: String? = "value" // nullable type
+var a: String = "value" // non-null type
+a = null // not possible
+```
+If you want a variable to be able to hold null, you need to declare a nullable type:
+```kotlin
+var b: String? = "value" // nullable type
+b = null // possible
 ```
 
 ### What are lambda expressions and higher order functions in Kotlin? Why would you store a function inside a variable? (0,5 points)
 
-<span style="color:blue">Provide your answer here!</span>
 Higher order functions are functions that have functions as parameters or as return value.
-
+To pass a function as a parameter of another function we have to use lambda expressions.
+Lambda expressions are functions that are not declared and can be stored in variables.
+```kotlin
+val product: (Int, Int) -> Int = { x: Int, y: Int -> x * y } // lambda expression syntax
+```
+A common use case for lambda expressions are callback functions.
+A callback function is passed as an argument to a function and can then be invoked by the higher order function.
 
 ### Provide a solution for the following number guessing game inside `App.kt`. (3 points)
 
